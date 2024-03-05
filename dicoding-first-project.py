@@ -59,6 +59,7 @@ def data_wrangling(data_df):
     cleaned_data_df = clean_data(data_df.copy())
     st.write(cleaned_data_df)
 
+# Fungsi untuk menjawab pertanyaan EDA
 def eda_questions(data_df):
     st.subheader('Exploratory Data Analysis (EDA)')
     
@@ -74,9 +75,8 @@ def eda_questions(data_df):
     st.write(data_musim)
     st.write('Grafik')
     data_musim['total'] = data_musim['casual'] + data_musim['registered']
-    fig, ax = plt.subplots()
-    sns.barplot(data=data_musim, x="season", y="total", hue="weathersit", errorbar=None, ax=ax)
-    st.pyplot(fig)
+    sns.barplot(data=data_musim, x="season", y="total", hue="weathersit", errorbar=None)
+    st.pyplot()
 
     st.subheader('Pertanyaan 2')
     st.write("Pengaruh hari kerja/akhir pekan terhadap peminjaman untuk setiap musim?")
@@ -91,11 +91,10 @@ def eda_questions(data_df):
     st.write(data_holiday.corr())
     st.write('Grafik')
     data_holiday['total'] = data_holiday['casual'] + data_holiday['registered']
-    fig, ax = plt.subplots()
-    sns.scatterplot(data=data_holiday, x='season', y='casual', ax=ax)
-    sns.scatterplot(data=data_holiday, x='season', y='registered', ax=ax)
-    ax.set_ylim(150, 190)
-    st.pyplot(fig)
+    sns.scatterplot(data=data_holiday, x='season', y='casual')
+    sns.scatterplot(data=data_holiday, x='season', y='registered')
+    plt.ylim(150, 190)
+    st.pyplot()
 
 def main():
     st.title('Analisis Data Bike Sharing')

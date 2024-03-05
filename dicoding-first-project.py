@@ -4,40 +4,10 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 # Fungsi untuk mengimpor data
-@st.cache(allow_output_mutation=True)
+@st.cache
 def load_data():
     data_df = pd.read_csv('day.csv')
     return data_df
-
-def assessing_data(data_df):
-    st.subheader("Assessing Data")
-    st.write("Melakukan penilaian data untuk mengidentifikasi masalah kualitas data.")
-
-    # Menampilkan 5 baris pertama dari dataset
-    st.write("Lima baris pertama dari dataset:")
-    st.write(data_df.head())
-
-    # Menampilkan info dataset
-    st.write("Informasi dataset:")
-    st.write(data_df.info())
-
-    # Menampilkan ringkasan statistik dataset
-    st.write("Ringkasan statistik dataset:")
-    st.write(data_df.describe())
-
-    # Menampilkan kolom yang memiliki nilai kosong (NaN)
-    missing_values = data_df.isnull().sum()
-    st.write("Kolom dengan nilai kosong:")
-    st.write(missing_values[missing_values > 0])
-
-    # Menampilkan statistik tambahan
-    st.write("Statistik tambahan:")
-    st.write(data_df.describe(include='all'))
-
-    # Menampilkan distribusi nilai unik pada setiap kolom
-    st.write("Distribusi nilai unik pada setiap kolom:")
-    for col in data_df.columns:
-        st.write(f"Kolom '{col}': {data_df[col].nunique()} nilai unik")
 
 # Fungsi untuk melakukan pembersihan data
 def clean_data(data_df):
@@ -81,7 +51,7 @@ def eda_questions(data_df):
     st.pyplot()
 
     st.subheader('Pertanyaan 2')
-    st.write("Pengaruh hari kerja/akhir pekan terhadap peminjaman untuk setiap musim?")
+    st.write("Pengaruh hari kerja/ akhir pekan terhadap peminjaman untuk setiap musim?")
     st.write('')
     st.write("Melakukan pemetaan tabel menggunakan pivot table")
     data_holiday = data_df.groupby(by="season").agg({

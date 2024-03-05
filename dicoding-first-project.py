@@ -51,7 +51,7 @@ def eda_questions(data_df):
     st.pyplot()
 
     st.subheader('Pertanyaan 2')
-    st.write("Pengaruh hari terhadap peminjaman untuk setiap musim?")
+    st.write("Pengaruh hari kerja/akhir pekan terhadap peminjaman untuk setiap musim?")
     st.write('')
     st.write("Melakukan pemetaan tabel menggunakan pivot table")
     data_holiday = data_df.groupby(by="season").agg({

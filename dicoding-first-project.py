@@ -75,9 +75,12 @@ def eda_questions(data_df):
     st.write("Total peminjaman untuk masing-masing kondisi cuaca:")
     st.write(total_rental_per_weather)
     
-    max_season = total_rental_per_weather.idxmax()
-    min_season = total_rental_per_weather.idxmin()
-    st.write(f"Peminjam terbanyak berada pada musim {max_season} dan peminjam paling sedikit berada pada musim {min_season}.")
+    max_season = total_rental_per_season.idxmax()
+    min_season = total_rental_per_season.idxmin()
+    
+    seasons_map = {'Spring': 'Spring (Musim Semi)', 'Summer': 'Summer (Musim Panas)', 'Fall': 'Fall (Musim Gugur)', 'Winter': 'Winter (Musim Dingin)'}
+    
+    st.write(f"Peminjam terbanyak berada pada {seasons_map[max_season]} dan peminjam paling sedikit berada pada {seasons_map[min_season]}.")
     
     # Kesimpulan Pertanyaan 2
     st.subheader('Kesimpulan Pertanyaan 2:')
@@ -88,7 +91,10 @@ def eda_questions(data_df):
     
     max_day = weekday_vs_weekend.idxmax()
     min_day = weekday_vs_weekend.idxmin()
-    st.write(f"Peminjam terbanyak berada pada hari {max_day} dan peminjam paling sedikit berada pada hari {min_day}.")
+    
+    days_map = {0: 'Minggu', 1: 'Senin', 2: 'Selasa', 3: 'Rabu', 4: 'Kamis', 5: 'Jumat', 6: 'Sabtu'}
+    
+    st.write(f"Peminjam terbanyak berada pada hari {days_map[max_day]} dan peminjam paling sedikit berada pada hari {days_map[min_day]}.")
 
 def main():
     st.title('Analisis Data Bike Sharing')

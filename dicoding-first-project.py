@@ -47,8 +47,9 @@ def eda_questions(data_df):
     st.write(data_musim)
     st.write('Grafik')
     data_musim['total'] = data_musim['casual'] + data_musim['registered']
-    sns.barplot(data=data_musim, x="season", y="total", hue="weathersit", errorbar=None)
-    st.pyplot()
+    fig, ax = plt.subplots()
+    sns.barplot(data=data_musim, x="season", y="total", hue="weathersit", errorbar=None, ax=ax)
+    st.pyplot(fig)
 
     st.subheader('Pertanyaan 2')
     st.write("Pengaruh hari kerja/ akhir pekan terhadap peminjaman untuk setiap musim?")
@@ -59,21 +60,20 @@ def eda_questions(data_df):
         "registered": "nunique",
     })
     st.write(data_holiday)
-    st.write('Mengidentifikasi relationship menggunakan correlation')
-    st.write(data_holiday.corr())
     st.write('Grafik')
     data_holiday['total'] = data_holiday['casual'] + data_holiday['registered']
-    sns.scatterplot(data=data_holiday, x='season', y='casual')
-    sns.scatterplot(data=data_holiday, x='season', y='registered')
-    plt.ylim(150, 190)
-    st.pyplot()
+    fig, ax = plt.subplots()
+    sns.scatterplot(data=data_holiday, x='season', y='casual', ax=ax)
+    sns.scatterplot(data=data_holiday, x='season', y='registered', ax=ax)
+    ax.set_ylim(150, 190)
+    st.pyplot(fig)
     
     # Kesimpulan Pertanyaan 1
     st.subheader('Kesimpulan Pertanyaan 1:')
-    total_rental_per_weather = data_df.groupby('weathersit')['cnt'].sum()
+    total_rental_per_weather = data_df.groupby('season')['cnt'].sum()
     st.write("Berdasarkan analisis, terlihat bahwa distribusi peminjaman berbeda-beda untuk setiap musim dan kondisi cuaca.")
     st.write("Total peminjaman untuk masing-masing kondisi cuaca:")
-    st.write(total_rental_per_weather)
+    st.write(total_rental_per_season)
     
     max_season = total_rental_per_season.idxmax()
     min_season = total_rental_per_season.idxmin()

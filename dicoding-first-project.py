@@ -81,7 +81,7 @@ def eda_questions(data_df):
     st.pyplot()
 
     st.subheader('Pertanyaan 2')
-    st.write("Pengaruh hari kerja/ akhir pekan terhadap peminjaman untuk setiap musim?")
+    st.write("Pengaruh hari kerja/akhir pekan terhadap peminjaman untuk setiap musim?")
     st.write('')
     st.write("Melakukan pemetaan tabel menggunakan pivot table")
     data_holiday = data_df.groupby(by="season").agg({
@@ -97,11 +97,10 @@ def eda_questions(data_df):
     sns.scatterplot(data=data_holiday, x='season', y='registered')
     plt.ylim(150, 190)
     st.pyplot()
-    
+
 def main():
     st.title('Analisis Data Bike Sharing')
     data_df = load_data()
-    assessing_data(data_df)  # Dipanggil setelah data_df diinisialisasi
     
     menu = ["Data Wrangling", "Exploratory Data Analysis (EDA)"]
     choice = st.sidebar.selectbox("Pilihan Menu", menu)

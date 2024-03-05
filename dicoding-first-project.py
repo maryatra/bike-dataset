@@ -39,8 +39,6 @@ def assessing_data(data_df):
     for col in data_df.columns:
         st.write(f"Kolom '{col}': {data_df[col].nunique()} nilai unik")
 
-assessing_data(data_df)
-
 # Fungsi untuk melakukan pembersihan data
 def clean_data(data_df):
     data_df['season'] = data_df['season'].map({1: 'Spring', 2: 'Summer', 3: 'Fall', 4: 'Winter'})

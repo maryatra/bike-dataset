@@ -14,23 +14,6 @@ def clean_data(data_df):
     data_df['season'] = data_df['season'].map({1: 'Spring', 2: 'Summer', 3: 'Fall', 4: 'Winter'})
     return data_df
 
-# Fungsi untuk menampilkan data wrangling
-def data_wrangling(data_df):
-    st.subheader("Data Wrangling")
-    
-    st.subheader("Gathering Data")
-    st.write("Berikut merupakan dataset dari Bike Sharing pada skala hari")
-    st.write(data_df)
-
-    st.subheader("Assessing Data")
-    st.write("Melakukan pemeriksaan parameter statistik menggunakan metode describe()")
-    st.write(data_df.describe())
-
-    st.subheader("Cleaning Data")
-    st.write("Mengubah nilai dari parameter 'season' menjadi nama musim")
-    cleaned_data_df = clean_data(data_df.copy())
-    st.write(cleaned_data_df)
-
 # Fungsi untuk menjawab pertanyaan EDA
 def eda_questions(data_df):
     st.subheader('Exploratory Data Analysis (EDA)')
@@ -59,8 +42,6 @@ def eda_questions(data_df):
         "registered": "nunique",
     })
     st.write(data_holiday)
-    st.write('Mengidentifikasi relationship menggunakan correlation')
-    st.write(data_holiday.corr())
     st.write('Grafik')
     data_holiday['total'] = data_holiday['casual'] + data_holiday['registered']
     sns.scatterplot(data=data_holiday, x='season', y='casual')
@@ -75,12 +56,20 @@ def eda_questions(data_df):
     st.write("Total peminjaman untuk masing-masing kondisi cuaca:")
     st.write(total_rental_per_weather)
     
+    max_season = total_rental_per_weather.idxmax()
+    min_season = total_rental_per_weather.idxmin()
+    st.write(f"Peminjam terbanyak berada pada musim {max_season} dan peminjam paling sedikit berada pada musim {min_season}.")
+    
     # Kesimpulan Pertanyaan 2
     st.subheader('Kesimpulan Pertanyaan 2:')
     weekday_vs_weekend = data_df.groupby('weekday')['cnt'].sum()
     st.write("Berdasarkan analisis, terdapat hubungan antara hari kerja/akhir pekan dengan jumlah peminjaman untuk setiap musim.")
     st.write("Total peminjaman pada hari kerja vs akhir pekan:")
     st.write(weekday_vs_weekend)
+    
+    max_day = weekday_vs_weekend.idxmax()
+    min_day = weekday_vs_weekend.idxmin()
+    st.write(f"Peminjam terbanyak berada pada hari {max_day} dan peminjam paling sedikit berada pada hari {min_day}.")
 
 def main():
     st.title('Analisis Data Bike Sharing')
@@ -96,4 +85,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-    

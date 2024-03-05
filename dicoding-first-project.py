@@ -70,9 +70,9 @@ def eda_questions(data_df):
     
     # Kesimpulan Pertanyaan 1
     st.subheader('Kesimpulan Pertanyaan 1:')
-    total_rental_per_weather = data_df.groupby('season')['cnt'].sum()
+    total_rental_per_season = data_df.groupby('season')['cnt'].sum()
     st.write("Berdasarkan analisis, terlihat bahwa distribusi peminjaman berbeda-beda untuk setiap musim dan kondisi cuaca.")
-    st.write("Total peminjaman untuk masing-masing kondisi cuaca:")
+    st.write("Total peminjaman untuk masing-masing musim:")
     st.write(total_rental_per_season)
     
     max_season = total_rental_per_season.idxmax()
@@ -95,7 +95,7 @@ def eda_questions(data_df):
     days_map = {0: 'Minggu', 1: 'Senin', 2: 'Selasa', 3: 'Rabu', 4: 'Kamis', 5: 'Jumat', 6: 'Sabtu'}
     
     st.write(f"Peminjam terbanyak berada pada hari {days_map[max_day]} dan peminjam paling sedikit berada pada hari {days_map[min_day]}.")
-
+    
 def main():
     st.title('Analisis Data Bike Sharing')
     data_df = load_data()

@@ -68,7 +68,7 @@ def eda_questions(data_df):
     plt.ylim(150, 190)
     st.pyplot()
 
-# Kesimpulan Pertanyaan 1
+    # Kesimpulan Pertanyaan 1
     st.subheader('Kesimpulan Pertanyaan 1:')
     total_rental_per_weather = data_df.groupby('weathersit')['cnt'].sum()
     st.write("Berdasarkan analisis, terlihat bahwa distribusi peminjaman berbeda-beda untuk setiap musim dan kondisi cuaca.")

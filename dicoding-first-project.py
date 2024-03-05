@@ -9,6 +9,38 @@ def load_data():
     data_df = pd.read_csv('day.csv')
     return data_df
 
+def assessing_data(data_df):
+    st.subheader("Assessing Data")
+    st.write("Melakukan penilaian data untuk mengidentifikasi masalah kualitas data.")
+
+    # Menampilkan 5 baris pertama dari dataset
+    st.write("Lima baris pertama dari dataset:")
+    st.write(data_df.head())
+
+    # Menampilkan info dataset
+    st.write("Informasi dataset:")
+    st.write(data_df.info())
+
+    # Menampilkan ringkasan statistik dataset
+    st.write("Ringkasan statistik dataset:")
+    st.write(data_df.describe())
+
+    # Menampilkan kolom yang memiliki nilai kosong (NaN)
+    missing_values = data_df.isnull().sum()
+    st.write("Kolom dengan nilai kosong:")
+    st.write(missing_values[missing_values > 0])
+
+    # Menampilkan statistik tambahan
+    st.write("Statistik tambahan:")
+    st.write(data_df.describe(include='all'))
+
+    # Menampilkan distribusi nilai unik pada setiap kolom
+    st.write("Distribusi nilai unik pada setiap kolom:")
+    for col in data_df.columns:
+        st.write(f"Kolom '{col}': {data_df[col].nunique()} nilai unik")
+
+assessing_data(data_df)
+
 # Fungsi untuk melakukan pembersihan data
 def clean_data(data_df):
     data_df['season'] = data_df['season'].map({1: 'Spring', 2: 'Summer', 3: 'Fall', 4: 'Winter'})

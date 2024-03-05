@@ -70,13 +70,13 @@ def eda_questions(data_df):
     
     # Kesimpulan Pertanyaan 1
     st.subheader('Kesimpulan Pertanyaan 1:')
-    total_rental_per_season = data_df.groupby('season')['cnt'].sum()
+    total_rental_per_season = data_df.groupby('season')[['casual', 'registered']].sum()  # Menggunakan sum untuk mendapatkan jumlah total peminjaman
     st.write("Berdasarkan analisis, terlihat bahwa distribusi peminjaman berbeda-beda untuk setiap musim dan kondisi cuaca.")
     st.write("Total peminjaman untuk masing-masing musim:")
     st.write(total_rental_per_season)
     
-    max_season = total_rental_per_season.idxmax()
-    min_season = total_rental_per_season.idxmin()
+    max_season = total_rental_per_season.sum(axis=1).idxmax()  # Menggunakan sum(axis=1) untuk mendapatkan total peminjaman
+    min_season = total_rental_per_season.sum(axis=1).idxmin()  # Menggunakan sum(axis=1) untuk mendapatkan total peminjaman
     
     seasons_map = {'Spring': 'Spring (Musim Semi)', 'Summer': 'Summer (Musim Panas)', 'Fall': 'Fall (Musim Gugur)', 'Winter': 'Winter (Musim Dingin)'}
     

@@ -67,6 +67,20 @@ def eda_questions(data_df):
     sns.scatterplot(data=data_holiday, x='season', y='registered')
     plt.ylim(150, 190)
     st.pyplot()
+    
+    # Kesimpulan Pertanyaan 1
+    st.subheader('Kesimpulan Pertanyaan 1:')
+    total_rental_per_weather = data_df.groupby('weathersit')['cnt'].sum()
+    st.write("Berdasarkan analisis, terlihat bahwa distribusi peminjaman berbeda-beda untuk setiap musim dan kondisi cuaca.")
+    st.write("Total peminjaman untuk masing-masing kondisi cuaca:")
+    st.write(total_rental_per_weather)
+    
+    # Kesimpulan Pertanyaan 2
+    st.subheader('Kesimpulan Pertanyaan 2:')
+    weekday_vs_weekend = data_df.groupby('weekday')['cnt'].sum()
+    st.write("Berdasarkan analisis, terdapat hubungan antara hari kerja/akhir pekan dengan jumlah peminjaman untuk setiap musim.")
+    st.write("Total peminjaman pada hari kerja vs akhir pekan:")
+    st.write(weekday_vs_weekend)
 
 def main():
     st.title('Analisis Data Bike Sharing')

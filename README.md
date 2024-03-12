@@ -1,4 +1,4 @@
-##Buat virtual environtment dan install library
+## Buat virtual environtment dan install library
 '''
 conda create --name main-ds python = 3.12
 conda active main-ds
